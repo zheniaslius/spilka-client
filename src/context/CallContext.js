@@ -45,6 +45,7 @@ const CallContextProvider = ({ children }) => {
   const handlePeer = (peer) => {
     peer.on('stream', (currentStream) => {
       userVideo.current && (userVideo.current.srcObject = currentStream);
+      console.log('on stream', currentStream);
     });
     peer.on('error', () => leaveCall(true));
     peer.on('close', () => leaveCall());
