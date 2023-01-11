@@ -11,9 +11,9 @@ const config = {
       urls: 'stun:stun.l.google.com:19302',
     },
     {
-      urls: 'turn:relay.metered.ca:443',
-      username: '73149a1aeee16368aa8111a4',
-      credential: 'n2NnO03ImERhjnOj',
+      url: 'turn:global.turn.twilio.com:3478?transport=udp',
+      username: '32f1fb6bc2aae2b239899ca55612c4067b15627d01bf762bfb5eb03083b87a64',
+      credential: 'Gq2PZPmVj6ME7hIRVkTA7Pak0Teq77rVbwY+rW6ojmc='
     },
   ],
 };
