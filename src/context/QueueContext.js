@@ -3,7 +3,8 @@ import { addDoc, collection, query, where, getDocs, doc, limit, updateDoc } from
 
 import db from '../config/firebase';
 
-const colRef = collection(db, 'sessions');
+const dbName = process.env.REACT_APP_DB_NAME;
+const colRef = collection(db, dbName);
 
 const QueueContext = createContext();
 
@@ -34,7 +35,7 @@ const QueueContextProvider = ({ children }) => {
     try {
       const querySnapshot = await getDocs(query(colRef, where('sessionId', '==', id), limit(1)));
       const docId = querySnapshot.docs[0].id;
-      const docRef = doc(db, 'sessions', docId);
+      const docRef = doc(db, dbName, docId);
       promise = updateDoc(docRef, { inSearch });
     } catch (error) {
       console.error('Setting status error', error);

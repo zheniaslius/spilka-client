@@ -8,7 +8,7 @@ const CurrentUsers = () => {
   const [usersCount, setUsersCount] = useState();
 
   useEffect(() => {
-    const q = query(collection(db, 'sessions'));
+    const q = query(collection(db, process.env.REACT_APP_DB_NAME));
 
     onSnapshot(q, (snapshot) => {
       setUsersCount(snapshot.size);
