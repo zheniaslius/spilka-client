@@ -8,7 +8,8 @@ const socket = io(process.env.REACT_APP_API_ENDPOINT);
 const config = {
   iceServers: [
     {
-      urls: 'stun:stun.l.google.com:19302',
+      url: 'stun:global.stun.twilio.com:3478?transport=udp',
+      urls: 'stun:global.stun.twilio.com:3478?transport=udp'
     },
     {
       url: 'turn:global.turn.twilio.com:3478?transport=udp',
