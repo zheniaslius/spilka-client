@@ -6,10 +6,17 @@ const CallContext = createContext();
 
 const socket = io(process.env.REACT_APP_API_ENDPOINT);
 const config = {
-  iceServers: [{
-    urls: "stun:stun.l.google.com:19302"
-  }]
-}
+  iceServers: [
+    {
+      urls: 'stun:stun.l.google.com:19302',
+    },
+    {
+      urls: 'turn:relay.metered.ca:443',
+      username: '73149a1aeee16368aa8111a4',
+      credential: 'n2NnO03ImERhjnOj',
+    },
+  ],
+};
 
 const CallContextProvider = ({ children }) => {
   const { abortSpeakerSearch } = useContext(QueueContext);
@@ -65,7 +72,7 @@ const CallContextProvider = ({ children }) => {
     peer.signal(call.signal);
 
     handlePeer(peer);
-  }, [call.from, call.signal, stream, handlePeer])
+  }, [call.from, call.signal, stream, handlePeer]);
 
   const callUser = (id) => {
     const peer = new window.SimplePeer({ initiator: true, trickle: false, stream, config });
@@ -87,7 +94,7 @@ const CallContextProvider = ({ children }) => {
     socket.off('callAccepted');
     abortSpeakerSearch();
     setCallPending(false);
-  }
+  };
 
   const leaveCall = (isError) => {
     hangUp();
