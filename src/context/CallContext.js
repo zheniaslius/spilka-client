@@ -36,6 +36,7 @@ const CallContextProvider = ({ children }) => {
     }
   }, [callPending, abortSpeakerSearch]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handlePeer = (peer) => {
     peer.on('stream', (currentStream) => {
       userVideo.current && (userVideo.current.srcObject = currentStream);
@@ -58,7 +59,7 @@ const CallContextProvider = ({ children }) => {
     peer.signal(call.signal);
 
     handlePeer(peer);
-  }, [handlePeer, stream, call.from, call.signal]);
+  }, [call.from, call.signal, stream, handlePeer])
 
   const callUser = (id) => {
     const peer = new window.SimplePeer({ initiator: true, trickle: false, stream });

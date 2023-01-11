@@ -3,7 +3,7 @@ import { ReactComponent as User } from '../../assets/images/icons/user.svg';
 import { ReactComponent as Disconnected } from '../../assets/images/icons/disconnect.svg';
 
 export const Container = styled.div`
-  height: 350px;
+  height: 310px;
   padding-top: 169px;
   display: flex;
   justify-content: center;

@@ -10,13 +10,9 @@ const Audio = () => {
   useEffect(() => {
     if (call.isReceivingCall) {
       answerCall();
-      playAlertSound();
     }
-  }, [call.isReceivingCall, answerCall]);
-
-  const playAlertSound = () => {
-    
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [call.isReceivingCall]);
 
   useEffect(() => {
     me && setId(me);

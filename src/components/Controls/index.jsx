@@ -12,14 +12,10 @@ const Controls = () => {
   const audio = new Audio(notificaionSound);
 
   const callRandomUser = async () => {
-    try {
-      await setSearchStatus(true);
-      setUserDisconnected(false);
-      const speakerId = await findSpeaker();
-      callUser(speakerId);
-    } catch (error) {
-      console.error('Error calling random user', error);
-    }
+    await setSearchStatus(true);
+    setUserDisconnected(false);
+    const speakerId = await findSpeaker();
+    callUser(speakerId);
 
     audio.play();
   };

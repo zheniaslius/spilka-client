@@ -9,7 +9,7 @@ import Header from './components/Header';
 
 const Wrapper = styled.div`
   margin: 150px auto 200px;
-  max-width: 640px;
+  max-width: 620px;
 `;
 
 const Container = styled.div`
@@ -22,7 +22,7 @@ const Footer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 28px;
-  padding: 0 15px;
+  padding: 0 13px;
 `;
 
 const App = () => {
