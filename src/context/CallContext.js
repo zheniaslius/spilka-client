@@ -4,7 +4,7 @@ import { QueueContext } from './QueueContext';
 
 const CallContext = createContext();
 
-const socket = io(`${process.env.API_ENDPOINT}:4000`);
+const socket = io(`${process.env.REACT_APP_API_ENDPOINT}:4000`);
 
 const CallContextProvider = ({ children }) => {
   const { abortSpeakerSearch } = useContext(QueueContext);
