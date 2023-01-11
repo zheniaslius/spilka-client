@@ -1,4 +1,4 @@
-import React, { createContext, useState, useRef, useEffect, useContext } from 'react';
+import React, { createContext, useState, useRef, useEffect, useContext, useCallback } from 'react';
 import { io } from 'socket.io-client';
 import { QueueContext } from './QueueContext';
 
@@ -46,7 +46,7 @@ const CallContextProvider = ({ children }) => {
     connectionRef.current = peer;
   };
 
-  const answerCall = () => {
+  const answerCall = useCallback(() => {
     setCallPending(true);
 
     const peer = new window.SimplePeer({ initiator: false, trickle: false, stream });
@@ -58,7 +58,7 @@ const CallContextProvider = ({ children }) => {
     peer.signal(call.signal);
 
     handlePeer(peer);
-  };
+  }, [handlePeer, stream, call.from, call.signal]);
 
   const callUser = (id) => {
     const peer = new window.SimplePeer({ initiator: true, trickle: false, stream });
