@@ -16,9 +16,7 @@ const Controls = () => {
       await setSearchStatus(true);
       setUserDisconnected(false);
       const speakerId = await findSpeaker();
-      if (speakerId) {
-        callUser(speakerId);
-      }
+      callUser(speakerId);
     } catch (error) {
       console.error('Error calling', error);
     }
