@@ -5,6 +5,11 @@ import { QueueContext } from './QueueContext';
 const CallContext = createContext();
 
 const socket = io(process.env.REACT_APP_API_ENDPOINT);
+const config = {
+  iceServers: [{
+    urls: "stun:stun.l.google.com:19302"
+  }]
+}
 
 const CallContextProvider = ({ children }) => {
   const { abortSpeakerSearch } = useContext(QueueContext);
@@ -50,7 +55,7 @@ const CallContextProvider = ({ children }) => {
   const answerCall = useCallback(() => {
     setCallPending(true);
 
-    const peer = new window.SimplePeer({ initiator: false, trickle: false, stream });
+    const peer = new window.SimplePeer({ initiator: false, trickle: false, stream, config });
 
     peer.on('signal', (data) => {
       socket.emit('answerCall', { signal: data, to: call.from });
@@ -62,7 +67,7 @@ const CallContextProvider = ({ children }) => {
   }, [call.from, call.signal, stream, handlePeer])
 
   const callUser = (id) => {
-    const peer = new window.SimplePeer({ initiator: true, trickle: false, stream });
+    const peer = new window.SimplePeer({ initiator: true, trickle: false, stream, config });
 
     peer.on('signal', (data) => {
       socket.emit('callUser', { userToCall: id, signalData: data, from: me });
