@@ -25,7 +25,13 @@ const CallContextProvider = ({ children }) => {
     });
 
     socket.on('me', (id) => {
-      peer.current = new Peer(id);
+      peer.current = new Peer(id, {
+        host: process.env.REACT_APP_PEER_HOSTNAME,
+        path: '/peerjs/spilka',
+        port: 443,
+        debug: true,
+        secure: true,
+      });
       setMe(id);
     });
 
