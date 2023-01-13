@@ -25,12 +25,7 @@ const CallContextProvider = ({ children }) => {
     });
 
     socket.on('me', (id) => {
-      peer.current = new Peer(id, {
-        host: process.env.REACT_APP_PEER_HOSTNAME,
-        path: '/peerjs/spilka',
-        port: 4000,
-        debug: true,
-      });
+      peer.current = new Peer(id);
       setMe(id);
     });
 
@@ -51,10 +46,7 @@ const CallContextProvider = ({ children }) => {
     }
   }, [callPending, abortSpeakerSearch]);
 
-  const renderAudio = (stream) => {
-    console.log(('render audio'))
-    (userVideo.current.srcObject = stream);
-  }
+  const renderAudio = (stream) => (userVideo.current.srcObject = stream);
 
   const answerCall = () => {
     setCallPending(true);
