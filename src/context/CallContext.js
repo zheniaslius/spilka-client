@@ -1,22 +1,11 @@
-import React, { createContext, useState, useRef, useEffect, useContext, useCallback } from 'react';
+import React, { createContext, useState, useRef, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
 import { QueueContext } from './QueueContext';
+import { Peer } from 'peerjs';
 
 const CallContext = createContext();
 
 const socket = io(process.env.REACT_APP_API_ENDPOINT);
-const config = {
-  iceServers: [
-    {
-      urls: 'stun:stun.l.google.com:19302',
-    },
-    {
-      urls: 'turn:relay.metered.ca:443',
-      username: '73149a1aeee16368aa8111a4',
-      credential: 'n2NnO03ImERhjnOj',
-    },
-  ],
-};
 
 const CallContextProvider = ({ children }) => {
   const { abortSpeakerSearch } = useContext(QueueContext);
@@ -27,18 +16,32 @@ const CallContextProvider = ({ children }) => {
   const [userDisconnected, setUserDisconnected] = useState(false);
 
   const userVideo = useRef();
-  const connectionRef = useRef();
+  const peer = useRef();
+  const currentCall = useRef();
 
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then((currentStream) => {
       setStream(currentStream);
     });
 
-    socket.on('me', (id) => setMe(id));
-
-    socket.on('callUser', ({ from, signal }) => {
-      setCall({ isReceivingCall: true, from, signal });
+    socket.on('me', (id) => {
+      peer.current = new Peer(id, {
+        host: process.env.REACT_APP_PEER_HOSTNAME,
+        path: '/peerjs/spilka',
+        port: 4000,
+        debug: true,
+      });
+      setMe(id);
     });
+
+    socket.on('callUser', ({ from }) => {
+      setCall({ isReceivingCall: true, from });
+    });
+
+    socket.on('disconnect-peer', () => {
+      hangUp();
+      setUserDisconnected(true);
+    })
   }, []);
 
   useEffect(() => {
@@ -48,60 +51,45 @@ const CallContextProvider = ({ children }) => {
     }
   }, [callPending, abortSpeakerSearch]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const handlePeer = (peer) => {
-    peer.on('stream', (currentStream) => {
-      userVideo.current && (userVideo.current.srcObject = currentStream);
-      console.log('on stream', currentStream);
-    });
-    peer.on('error', () => leaveCall(true));
-    peer.on('close', () => leaveCall());
+  const renderAudio = (stream) => {
+    console.log('render', stream);
+    (userVideo.current.srcObject = stream);
+  }
 
-    connectionRef.current = peer;
+  const answerCall = () => {
+    setCallPending(true);
+    socket.emit('answerCall', { to: call.from });
+
+    peer.current.on('call', (call) => {
+      call.answer(stream);
+      call.on('stream', renderAudio);
+      currentCall.current = call;
+    });
   };
 
-  const answerCall = useCallback(() => {
-    setCallPending(true);
-
-    const peer = new window.SimplePeer({ initiator: false, trickle: false, stream, config });
-
-    peer.on('signal', (data) => {
-      socket.emit('answerCall', { signal: data, to: call.from });
-    });
-
-    peer.signal(call.signal);
-
-    handlePeer(peer);
-  }, [call.from, call.signal, stream, handlePeer]);
-
   const callUser = (id) => {
-    const peer = new window.SimplePeer({ initiator: true, trickle: false, stream, config });
+    socket.emit('callUser', { userToCall: id, from: me });
 
-    peer.on('signal', (data) => {
-      socket.emit('callUser', { userToCall: id, signalData: data, from: me });
-    });
-
-    socket.on('callAccepted', (signal) => {
+    socket.on('callAccepted', () => {
       setCallPending(true);
-      peer.signal(signal);
+      let call = peer.current.call(id, stream);
+      call.on('stream', renderAudio);
+      currentCall.current = call;
     });
-
-    handlePeer(peer);
   };
 
   const hangUp = () => {
-    setCall({});
     socket.off('callAccepted');
-    abortSpeakerSearch();
+    setCall({});
     setCallPending(false);
   };
 
-  const leaveCall = (isError) => {
+  const leaveCall = () => {
     hangUp();
-    isError && setUserDisconnected(true);
+    abortSpeakerSearch();
+    socket.emit('disconnect-peer', currentCall.current.peer);
 
-    connectionRef.current?.destroy();
-    connectionRef.current = null;
+    currentCall.current.close();
   };
 
   return (
