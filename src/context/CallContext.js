@@ -51,7 +51,10 @@ const CallContextProvider = ({ children }) => {
     }
   }, [callPending, abortSpeakerSearch]);
 
-  const renderAudio = (stream) => (userVideo.current.srcObject = stream);
+  const renderAudio = (stream) => {
+    console.log(('render audio'))
+    (userVideo.current.srcObject = stream);
+  }
 
   const answerCall = () => {
     setCallPending(true);
@@ -76,6 +79,7 @@ const CallContextProvider = ({ children }) => {
   };
 
   const hangUp = () => {
+    abortSpeakerSearch();
     socket.off('callAccepted');
     setCall({});
     setCallPending(false);
@@ -83,7 +87,6 @@ const CallContextProvider = ({ children }) => {
 
   const leaveCall = () => {
     hangUp();
-    abortSpeakerSearch();
     socket.emit('disconnect-peer', currentCall.current.peer);
 
     currentCall.current.close();
