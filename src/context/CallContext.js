@@ -44,7 +44,6 @@ const CallContextProvider = ({ children }) => {
     socket.on('disconnect-peer', () => {
       hangUp();
       setUserDisconnected(true);
-      setMicroMuted(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -85,6 +84,7 @@ const CallContextProvider = ({ children }) => {
     socket.off('callAccepted');
     setCall({});
     setCallPending(false);
+    setMicroMuted(false);
   };
 
   const leaveCall = () => {
