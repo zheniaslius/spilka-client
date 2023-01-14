@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   padding: 60px 0 70px;
+  position: relative;
 
   @media ${device.mobileL} {
     padding: 50px 0 60px;

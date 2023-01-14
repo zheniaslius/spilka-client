@@ -75,6 +75,7 @@ export const Pulse = styled.div`
   align-items: center;
   align-content: stretch;
   margin-top: -80px;
+  position: relative;
 `;
 
 export const Outline = styled.div`
@@ -92,4 +93,11 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const WarningMsg = styled.span`
+  position: absolute;
+  color: ${(props) => props.theme.colors.red};
+  bottom: 0;
+  white-space: nowrap;
 `;

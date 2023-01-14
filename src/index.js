@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import App from './App';
 import { CallContextProvider } from './context/CallContext';
 import { QueueContextProvider } from './context/QueueContext';
+import { MicrophoneContextProvider } from './context/MicrophoneContext';
 
 import './styles.css';
 
@@ -23,7 +24,9 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <QueueContextProvider>
       <CallContextProvider>
-        <App />
+        <MicrophoneContextProvider>
+          <App />
+        </MicrophoneContextProvider>
       </CallContextProvider>
     </QueueContextProvider>
   </ThemeProvider>,

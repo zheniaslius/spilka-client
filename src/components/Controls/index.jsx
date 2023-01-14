@@ -2,13 +2,14 @@ import React, { useContext } from 'react';
 
 import { CallContext } from '../../context/CallContext';
 import { QueueContext } from '../../context/QueueContext';
-import { Container, CallIcon, ControlsButton, FlexContainer } from './styles';
-import Microphone from './Microphone';
+import { MicrophoneContext } from '../../context/MicrophoneContext';
+import { Container, CallIcon, ControlsButton, FlexContainer, MicrophoneIcon } from './styles';
 import notificaionSound from '../../assets/sounds/notifications-sound-127856_6LGXAENB.mp3';
 
 const Controls = () => {
-  const { callPending, leaveCall, hangUp, callUser, stream, setUserDisconnected } = useContext(CallContext);
+  const { callPending, leaveCall, hangUp, callUser, setUserDisconnected } = useContext(CallContext);
   const { findSpeaker, updateDocument, loading } = useContext(QueueContext);
+  const { toggleMute, muted } = useContext(MicrophoneContext);
   const audio = new Audio(notificaionSound);
 
   const callRandomUser = async () => {
@@ -30,7 +31,7 @@ const Controls = () => {
           <ControlsButton onClick={callPending ? leaveCall : hangUp} cancel>
             <CallIcon />
           </ControlsButton>
-          <Microphone stream={stream} />
+          <MicrophoneIcon onClick={toggleMute} muted={muted} />
         </FlexContainer>
       ) : (
         <ControlsButton onClick={callRandomUser}>

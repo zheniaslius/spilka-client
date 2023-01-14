@@ -3,11 +3,23 @@ import { MoonLoader } from 'react-spinners';
 
 import { CallContext } from '../../context/CallContext';
 import { QueueContext } from '../../context/QueueContext';
-import { Pulse, Outline, Container, UserLogo, GuideText, SearchContainer, DisconnectedLogo, ErrorContainer } from './styles';
+import { MicrophoneContext } from '../../context/MicrophoneContext';
+import {
+  Pulse,
+  Outline,
+  Container,
+  UserLogo,
+  GuideText,
+  SearchContainer,
+  DisconnectedLogo,
+  ErrorContainer,
+  WarningMsg,
+} from './styles';
 
 const Main = () => {
   const { callPending, userDisconnected } = useContext(CallContext);
   const { loading } = useContext(QueueContext);
+  const { muted } = useContext(MicrophoneContext);
 
   const getScreen = () => {
     if (callPending) {
@@ -16,6 +28,7 @@ const Main = () => {
           <Outline />
           <Outline delayed />
           <UserLogo />
+          <WarningMsg>{muted && 'Your mic is muted'}</WarningMsg>
         </Pulse>
       );
     }
