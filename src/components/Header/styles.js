@@ -6,7 +6,7 @@ export const Container = styled.div`
   justify-content: center;
   margin-bottom: 30px;
 
-  @media ${device.tablet} {
+  @media ${device.laptopHeight} {
     margin-bottom: 15px;
   }
 `;
@@ -26,7 +26,7 @@ export const AppName = styled.h1`
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
 
-  @media ${device.tablet} {
+  @media ${device.laptopHeight} {
     font-size: 60px;
   }
 `;

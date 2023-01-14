@@ -11,7 +11,7 @@ export const Container = styled.div`
   padding: 60px 0 70px;
   position: relative;
 
-  @media ${device.mobileL} {
+  @media ${device.laptopHeight} {
     padding: 50px 0 60px;
   }
 `;

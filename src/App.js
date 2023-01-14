@@ -21,6 +21,11 @@ const Wrapper = styled.div`
   @media ${device.mobileL} {
     margin: 20px 0;
   }
+
+  @media ${device.laptopHeight} {
+    margin: 20px auto;
+    max-width: 483px;
+  }
 `;
 
 const Container = styled.div`
@@ -35,7 +40,7 @@ const Footer = styled.div`
   margin-top: 41px;
   padding: 0 13px;
 
-  @media ${device.mobileL} {
+  @media ${device.laptopHeight} {
     margin-top: 30px;
   }
 `;
