@@ -22,13 +22,13 @@ const theme = {
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <QueueContextProvider>
-      <CallContextProvider>
-        <MicrophoneContextProvider>
+    <MicrophoneContextProvider>
+      <QueueContextProvider>
+        <CallContextProvider>
           <App />
-        </MicrophoneContextProvider>
-      </CallContextProvider>
-    </QueueContextProvider>
+        </CallContextProvider>
+      </QueueContextProvider>
+    </MicrophoneContextProvider>
   </ThemeProvider>,
   document.getElementById('root')
 );

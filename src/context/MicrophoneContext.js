@@ -1,11 +1,11 @@
-import React, { createContext, useState, useEffect, useCallback, useContext } from 'react';
-import { CallContext } from './CallContext';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 
 const MicrophoneContext = createContext();
 
 const MicrophoneContextProvider = ({ children }) => {
+  const [stream, setStream] = useState();
   const [muted, setMuted] = useState();
-  const { stream } = useContext(CallContext);
+  console.log({muted})
 
   const toggleMute = () => setMuted((prevMuted) => !prevMuted);
 
@@ -26,7 +26,10 @@ const MicrophoneContextProvider = ({ children }) => {
     <MicrophoneContext.Provider
       value={{
         toggleMute,
+        setMuted,
         muted,
+        setStream,
+        stream,
       }}
     >
       {children}

@@ -3,6 +3,7 @@ import { io } from 'socket.io-client';
 import { Peer } from 'peerjs';
 
 import { QueueContext } from './QueueContext';
+import { MicrophoneContext } from './MicrophoneContext';
 
 const CallContext = createContext();
 
@@ -16,8 +17,8 @@ const options = {
 
 const CallContextProvider = ({ children }) => {
   const { abortSpeakerSearch } = useContext(QueueContext);
+  const { setStream, stream, setMuted: setMicroMuted } = useContext(MicrophoneContext);
   const [callPending, setCallPending] = useState(false);
-  const [stream, setStream] = useState();
   const [call, setCall] = useState({});
   const [me, setMe] = useState('');
   const [userDisconnected, setUserDisconnected] = useState(false);
@@ -43,8 +44,9 @@ const CallContextProvider = ({ children }) => {
     socket.on('disconnect-peer', () => {
       hangUp();
       setUserDisconnected(true);
+      setMicroMuted(false);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -103,7 +105,6 @@ const CallContextProvider = ({ children }) => {
         leaveCall,
         hangUp,
         answerCall,
-        stream,
         userDisconnected,
         setUserDisconnected,
       }}
