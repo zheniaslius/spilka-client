@@ -1,12 +1,23 @@
 import styled, { keyframes } from 'styled-components';
 import { ReactComponent as User } from '../../assets/images/icons/user.svg';
 import { ReactComponent as Disconnected } from '../../assets/images/icons/disconnect.svg';
+import { device } from '../../constants';
 
 export const Container = styled.div`
   height: 310px;
-  padding-top: 169px;
+  padding: 169px 0 0;
   display: flex;
   justify-content: center;
+
+  @media ${device.tablet} {
+    height: 200px;
+    padding: 118px 12px 0;
+  }
+
+  @media ${device.mobileM} {
+    height: 184px;
+    padding: 100px 12px 0;
+  }
 `;
 
 export const GuideText = styled.span`
@@ -15,6 +26,12 @@ export const GuideText = styled.span`
   font-size: 19px;
   margin-bottom: ${({ mb }) => (mb ? mb : '0')};
   line-height: 1.8;
+
+  @media ${device.tablet} {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 38px;
+  }
 `;
 
 export const UserLogo = styled(User)`

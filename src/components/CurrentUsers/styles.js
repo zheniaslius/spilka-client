@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const PeopleIcon = styled(Users)`
-  top: -2px;
+  top: -1px;
   position: relative;
   height: 25px;
   width: 25px;

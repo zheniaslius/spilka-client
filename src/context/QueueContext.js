@@ -31,6 +31,8 @@ const QueueContextProvider = ({ children }) => {
   }, [id, addToQueue]);
 
   const setSearchStatus = async (inSearch) => {
+    if (!id) return;
+
     let promise;
     try {
       const querySnapshot = await getDocs(query(colRef, where('sessionId', '==', id), limit(1)));

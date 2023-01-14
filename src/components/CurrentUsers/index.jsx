@@ -5,7 +5,7 @@ import { Container, PeopleIcon, Count } from './styles';
 import db from '../../config/firebase';
 
 const CurrentUsers = () => {
-  const [usersCount, setUsersCount] = useState();
+  const [usersCount, setUsersCount] = useState(0);
 
   useEffect(() => {
     const q = query(collection(db, process.env.REACT_APP_DB_NAME));
@@ -18,7 +18,7 @@ const CurrentUsers = () => {
   return (
     <Container>
       <PeopleIcon />
-      <Count>{usersCount}</Count>
+      <Count>Online: {usersCount}</Count>
     </Container>
   );
 };

@@ -3,10 +3,16 @@ import { ReactComponent as Call } from '../../assets/images/icons/telephone.svg'
 import { ReactComponent as Cancel } from '../../assets/images/icons/cross.svg';
 import { ReactComponent as Microphone } from '../../assets/images/icons/microphone.svg';
 
+import { device } from '../../constants';
+
 export const Container = styled.div`
   display: flex;
   justify-content: center;
   padding: 60px 0 70px;
+
+  @media ${device.mobileL} {
+    padding: 50px 0 60px;
+  }
 `;
 
 export const FlexContainer = styled.div`
@@ -37,7 +43,7 @@ export const MicrophoneIcon = styled(Microphone)`
   opacity: ${(props) => (props.muted ? 1 : 0.25)};
   position: relative;
   cursor: pointer;
-  transition: .1s ease-in;
+  transition: 0.1s ease-in;
   & path {
     fill: ${(props) => props.theme.colors.white};
   }
@@ -52,7 +58,7 @@ export const ControlsButton = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: .1s ease-in;
+  transition: 0.1s ease-in;
   & svg {
     transform: ${(props) => (props.cancel ? 'rotate(135deg)' : 'none')};
   }
