@@ -6,6 +6,8 @@ import db from '../config/firebase';
 const dbName = process.env.REACT_APP_DB_NAME;
 const colRef = collection(db, dbName);
 
+const REFETCH_DELAY = 500;
+
 const QueueContext = createContext();
 
 const QueueContextProvider = ({ children }) => {
@@ -30,24 +32,22 @@ const QueueContextProvider = ({ children }) => {
     id && addToQueue();
   }, [id, addToQueue]);
 
-  const setSearchStatus = async (inSearch) => {
+  const updateDocument = async (data) => {
     if (!id) return;
 
-    let promise;
     try {
       const querySnapshot = await getDocs(query(colRef, where('sessionId', '==', id), limit(1)));
       const docId = querySnapshot.docs[0].id;
       const docRef = doc(db, dbName, docId);
-      promise = updateDoc(docRef, { inSearch });
+      return updateDoc(docRef, data);
     } catch (error) {
       console.error('Setting status error', error);
     }
-    return promise;
   };
 
   const abortSpeakerSearch = () => {
     clearInterval(inerval.current);
-    setSearchStatus(false);
+    updateDocument({ inSearch: false });
     setLoading(false);
   };
 
@@ -73,7 +73,7 @@ const QueueContextProvider = ({ children }) => {
           console.error('Error with finding speaker');
           reject(error);
         }
-      }, 1000);
+      }, REFETCH_DELAY);
     });
   };
 
@@ -85,7 +85,7 @@ const QueueContextProvider = ({ children }) => {
         loading,
         abortSpeakerSearch,
         setId,
-        setSearchStatus,
+        updateDocument,
       }}
     >
       {children}

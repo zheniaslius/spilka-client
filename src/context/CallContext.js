@@ -1,11 +1,18 @@
 import React, { createContext, useState, useRef, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
-import { QueueContext } from './QueueContext';
 import { Peer } from 'peerjs';
+
+import { QueueContext } from './QueueContext';
 
 const CallContext = createContext();
 
 const socket = io(process.env.REACT_APP_API_ENDPOINT);
+
+const options = {
+  key: 'peerjs',
+  debug: 2,
+  secure: process.env.REACT_APP_ENV === 'PRODUCTION',
+};
 
 const CallContextProvider = ({ children }) => {
   const { abortSpeakerSearch } = useContext(QueueContext);
@@ -25,11 +32,7 @@ const CallContextProvider = ({ children }) => {
     });
 
     socket.on('me', (id) => {
-      peer.current = new Peer(id, {
-        key: "peerjs",
-        debug: 2,
-        secure: process.env.REACT_APP_ENV === "PRODUCTION",
-      });
+      peer.current = new Peer(id, options);
       setMe(id);
     });
 
@@ -68,7 +71,7 @@ const CallContextProvider = ({ children }) => {
 
     socket.on('callAccepted', () => {
       setCallPending(true);
-      let call = peer.current.call(id, stream);
+      const call = peer.current.call(id, stream);
       call.on('stream', renderAudio);
       currentCall.current = call;
     });

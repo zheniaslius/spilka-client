@@ -8,12 +8,12 @@ import notificaionSound from '../../assets/sounds/notifications-sound-127856_6LG
 
 const Controls = () => {
   const { callPending, leaveCall, hangUp, callUser, stream, setUserDisconnected } = useContext(CallContext);
-  const { findSpeaker, setSearchStatus, loading } = useContext(QueueContext);
+  const { findSpeaker, updateDocument, loading } = useContext(QueueContext);
   const audio = new Audio(notificaionSound);
 
   const callRandomUser = async () => {
     try {
-      await setSearchStatus(true);
+      await updateDocument({ inSearch: true });
       setUserDisconnected(false);
       const speakerId = await findSpeaker();
       callUser(speakerId);
