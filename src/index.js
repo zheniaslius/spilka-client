@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 
 import App from './App';
@@ -20,7 +20,10 @@ const theme = {
   },
 };
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
   <ThemeProvider theme={theme}>
     <MicrophoneContextProvider>
       <QueueContextProvider>
@@ -29,6 +32,5 @@ ReactDOM.render(
         </CallContextProvider>
       </QueueContextProvider>
     </MicrophoneContextProvider>
-  </ThemeProvider>,
-  document.getElementById('root')
+  </ThemeProvider>
 );
