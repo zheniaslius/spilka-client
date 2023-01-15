@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBVXThKZyK9CzHQS50CaYanI4sCprn_O-E',
@@ -11,6 +12,12 @@ const firebaseConfig = {
   measurementId: 'G-CE8NEXT81F',
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-export default getFirestore();
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('6LcBUf0jAAAAAPKS_daNmV5Y-Oc3TcZ2mopDFVoh'),
+  isTokenAutoRefreshEnabled: true
+});
+
+
+export default getFirestore(app);
