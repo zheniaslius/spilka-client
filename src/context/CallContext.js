@@ -16,7 +16,7 @@ const options = {
 };
 
 const CallContextProvider = ({ children }) => {
-  const { abortSpeakerSearch } = useContext(QueueContext);
+  const { abortSpeakerSearch, updateDocument } = useContext(QueueContext);
   const { setStream, stream, setMuted: setMicroMuted } = useContext(MicrophoneContext);
   const [callPending, setCallPending] = useState(false);
   const [call, setCall] = useState({});
@@ -57,14 +57,20 @@ const CallContextProvider = ({ children }) => {
 
   const renderAudio = (stream) => (userVideo.current.srcObject = stream);
 
+  const handleCall = (call) => {
+    call.on('stream', renderAudio);
+    currentCall.current = call;
+    const peerId = currentCall.current.peer;
+    updateDocument({ peerId });
+  };
+
   const answerCall = () => {
     setCallPending(true);
     socket.emit('answerCall', { to: call.from });
 
     peer.current.on('call', (call) => {
       call.answer(stream);
-      call.on('stream', renderAudio);
-      currentCall.current = call;
+      handleCall(call);
     });
   };
 
@@ -74,11 +80,11 @@ const CallContextProvider = ({ children }) => {
     socket.on('callAccepted', () => {
       setCallPending(true);
       const call = peer.current.call(id, stream);
-      call.on('stream', renderAudio);
-      currentCall.current = call;
+      handleCall(call);
     });
   };
 
+  // I pressed when searching
   const hangUp = () => {
     abortSpeakerSearch();
     socket.off('callAccepted');
