@@ -5,7 +5,6 @@ const MicrophoneContext = createContext();
 const MicrophoneContextProvider = ({ children }) => {
   const [stream, setStream] = useState();
   const [muted, setMuted] = useState();
-  console.log({muted})
 
   const toggleMute = () => setMuted((prevMuted) => !prevMuted);
 

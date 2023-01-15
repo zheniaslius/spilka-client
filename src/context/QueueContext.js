@@ -6,7 +6,7 @@ import db from '../config/firebase';
 const dbName = process.env.REACT_APP_DB_NAME;
 const colRef = collection(db, dbName);
 
-const REFETCH_DELAY = 500;
+const REFETCH_DELAY = 1000;
 
 const QueueContext = createContext();
 

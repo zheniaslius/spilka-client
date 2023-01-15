@@ -50,7 +50,6 @@ const CallContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (callPending) {
-      abortSpeakerSearch();
       setUserDisconnected(false);
     }
   }, [callPending, abortSpeakerSearch]);
@@ -65,6 +64,7 @@ const CallContextProvider = ({ children }) => {
   };
 
   const answerCall = () => {
+    abortSpeakerSearch();
     setCallPending(true);
     socket.emit('answerCall', { to: call.from });
 
@@ -95,9 +95,9 @@ const CallContextProvider = ({ children }) => {
 
   const leaveCall = () => {
     hangUp();
-    socket.emit('disconnect-peer', currentCall.current.peer);
+    socket.emit('disconnect-peer', currentCall.current?.peer);
 
-    currentCall.current.close();
+    currentCall.current?.close();
   };
 
   return (
