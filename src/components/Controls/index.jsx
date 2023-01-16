@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import ReactGA from 'react-ga';
 
 import { CallContext } from '../../context/CallContext';
 import { QueueContext } from '../../context/QueueContext';
@@ -12,6 +13,10 @@ const Controls = () => {
   const audio = new Audio(notificaionSound);
 
   const callRandomUser = async () => {
+    ReactGA.event({
+      category: 'App',
+      action: 'Started search',
+    });
     try {
       await updateDocument({ inSearch: true });
       setUserDisconnected(false);

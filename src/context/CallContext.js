@@ -1,6 +1,7 @@
 import React, { createContext, useState, useRef, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
 import { Peer } from 'peerjs';
+import ReactGA from 'react-ga';
 
 import { QueueContext } from './QueueContext';
 import { MicrophoneContext } from './MicrophoneContext';
@@ -16,7 +17,7 @@ const options = {
 };
 
 const CallContextProvider = ({ children }) => {
-  const { abortSpeakerSearch, updateDocument } = useContext(QueueContext);
+  const { abortSpeakerSearch } = useContext(QueueContext);
   const { setStream, stream, setMuted: setMicroMuted } = useContext(MicrophoneContext);
   const [callPending, setCallPending] = useState(false);
   const [call, setCall] = useState({});
@@ -62,6 +63,11 @@ const CallContextProvider = ({ children }) => {
   };
 
   const answerCall = () => {
+    ReactGA.event({
+      category: 'App',
+      action: 'Answered call',
+    });
+
     abortSpeakerSearch();
     setCallPending(true);
     socket.emit('answerCall', { to: call.from });
