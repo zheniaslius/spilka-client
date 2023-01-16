@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
+import './i18n';
 
 import App from './App';
 import { CallContextProvider } from './context/CallContext';
