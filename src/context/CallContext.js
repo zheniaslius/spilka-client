@@ -59,8 +59,6 @@ const CallContextProvider = ({ children }) => {
   const handleCall = (call) => {
     call.on('stream', renderAudio);
     currentCall.current = call;
-    const peerId = currentCall.current.peer;
-    updateDocument({ peerId });
   };
 
   const answerCall = () => {
