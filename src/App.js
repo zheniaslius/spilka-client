@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ReactGA from 'react-ga';
 
@@ -50,10 +50,6 @@ const TRACKING_ID = 'G-QTFJJYLH4C';
 ReactGA.initialize(TRACKING_ID);
 
 const App = () => {
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
-
   return (
     <Wrapper>
       <Header />
