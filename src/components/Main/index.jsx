@@ -50,7 +50,7 @@ const InitialText = ({ loading }) => {
   ) : (
     <GuideText>
       To start anonymous chat press the button <br />
-      Conversations are not recorded
+      Conversations are not recorded. <a href="https://bloggeek.me/is-webrtc-safe/" target="_blank" rel="noreferrer">Learn how</a>
     </GuideText>
   );
 };
@@ -58,7 +58,10 @@ const InitialText = ({ loading }) => {
 const DisconnectedText = () => {
   return (
     <ErrorContainer>
-      <GuideText mb="70px">User disconnected</GuideText>
+      <GuideText mb="70px">
+        User disconnected <br />
+        Start new search
+      </GuideText>
       <DisconnectedLogo />
     </ErrorContainer>
   );
