@@ -66,4 +66,10 @@ export const ControlsButton = styled.button`
   &:hover {
     filter: brightness(90%);
   }
+  &:disabled {
+    background: ${({ theme }) => theme.colors.grey};
+    &:hover {
+      filter: none;
+    }
+  }
 `;
