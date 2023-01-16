@@ -44,7 +44,7 @@ const Main = () => {
 const InitialText = ({ loading }) => {
   return loading ? (
     <SearchContainer>
-      <GuideText mb="70px">Seaching for someone cool...</GuideText>
+      <GuideText mb="70px">Seaching for someone cool</GuideText>
       <MoonLoader loading={loading} color="#ffffff" speedMultiplier={0.6} />
     </SearchContainer>
   ) : (
