@@ -1,5 +1,5 @@
 import React, { useState, useRef, createContext, useEffect, useCallback } from 'react';
-import { addDoc, collection, query, where, getDocs, doc, limit, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, query, where, getDocs, doc, limit, updateDoc, serverTimestamp } from 'firebase/firestore';
 
 import db from '../config/firebase';
 
@@ -22,6 +22,7 @@ const QueueContextProvider = ({ children }) => {
       addDoc(colRef, {
         sessionId: id,
         inSearch: false,
+        createdAt: serverTimestamp(),
       });
     } catch (error) {
       console.error('Error with adding to queue', error);
