@@ -5,8 +5,8 @@ import ReactGA from 'react-ga';
 import Main from './components/Main';
 import Audio from './components/Audio';
 import Controls from './components/Controls';
-import CurrentUsers from './components/CurrentUsers';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 import { device } from './constants';
 
@@ -35,17 +35,6 @@ const Container = styled.div`
   box-shadow: 0px 5px 14px -1px rgb(2 3 12 / 37%);
 `;
 
-const Footer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 41px;
-  padding: 0 13px;
-
-  @media ${device.laptopHeight} {
-    margin-top: 30px;
-  }
-`;
-
 const TRACKING_ID = 'G-QTFJJYLH4C';
 ReactGA.initialize(TRACKING_ID);
 
@@ -58,9 +47,7 @@ const App = () => {
         <Audio />
         <Controls />
       </Container>
-      <Footer>
-        <CurrentUsers />
-      </Footer>
+      <Footer />
     </Wrapper>
   );
 };

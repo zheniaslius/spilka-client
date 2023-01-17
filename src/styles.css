@@ -13,7 +13,26 @@ button {
     border: none;
 }
 
-a, a:visited {
+a {
     color: #fff;
-    text-underline-offset: 4px;
+    text-decoration: none;
+    display: inline-block;
+	position: relative;
+}
+
+a::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    bottom: 0;
+    height: 2px;
+    margin: -1px 0;
+    left: 0;
+    background-color: white;
+    transition: all 0.25s ease-in 0s;
+}
+
+a:hover::after {
+    width: 100%;
 }
