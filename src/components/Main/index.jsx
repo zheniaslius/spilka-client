@@ -51,6 +51,7 @@ const InitialText = ({ loading, t }) => {
     </SearchContainer>
   ) : (
     <GuideText>
+      {t('hello')} 👋 <br />
       {t('toStart')} <br />
       {t('notRecored')}.{' '}
       <a href="https://bloggeek.me/is-webrtc-safe/" target="_blank" rel="noreferrer">

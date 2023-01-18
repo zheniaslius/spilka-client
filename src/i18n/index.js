@@ -4,6 +4,7 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
+      'hello': 'Hi',
       'searching': 'Seaching for someone cool',
       'toStart': 'To start searching speaker press the button',
       'notRecored': 'Conversations are not recorded',
@@ -15,6 +16,7 @@ const resources = {
   },
   uk: {
     translation: {
+      'hello': 'Привіт',
       'searching': 'Шукаємо співрозмовника',
       'toStart': 'Щоб почати пошук співрозмовника натисніть кнопку',
       'notRecored': 'Розмови не записуються',
