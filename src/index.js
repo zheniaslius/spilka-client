@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import './i18n';
-import ReactGA from 'react-ga4';
+import GA4React from 'react-ga4';
 
 import App from './App';
 import { CallContextProvider } from './context/CallContext';
@@ -39,7 +39,7 @@ root.render(
 
 try {
   setTimeout((_) => {
-    const ga4react = 'G-C4YZZ43W5F';
+    const ga4react = new GA4React('G-C4YZZ43W5F');
     ga4react.initialize().catch((err) => console.error(err));
   }, 4000);
 } catch (err) {
