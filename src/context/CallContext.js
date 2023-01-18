@@ -1,7 +1,7 @@
 import React, { createContext, useState, useRef, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
 import { Peer } from 'peerjs';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 import { QueueContext } from './QueueContext';
 import { MicrophoneContext } from './MicrophoneContext';

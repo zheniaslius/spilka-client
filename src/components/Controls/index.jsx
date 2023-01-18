@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 import { CallContext } from '../../context/CallContext';
 import { QueueContext } from '../../context/QueueContext';
