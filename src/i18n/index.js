@@ -5,6 +5,7 @@ const resources = {
   en: {
     translation: {
       'hello': 'Hi',
+      'thisIs': 'This is audio chat roulette',
       'searching': 'Seaching for someone cool',
       'toStart': 'To start searching speaker press the button',
       'notRecored': 'Conversations are not recorded',
@@ -17,6 +18,7 @@ const resources = {
   uk: {
     translation: {
       'hello': 'Привіт',
+      'thisIs': 'Це голосова чат рулетка',
       'searching': 'Шукаємо співрозмовника',
       'toStart': 'Щоб почати пошук співрозмовника натисніть кнопку',
       'notRecored': 'Розмови не записуються',

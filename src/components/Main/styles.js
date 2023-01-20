@@ -23,12 +23,12 @@ export const Container = styled.div`
 export const GuideText = styled.span`
   color: ${(props) => props.theme.colors.white};
   text-align: center;
-  font-size: 19px;
+  font-size: 17px;
   margin-bottom: ${({ mb }) => (mb ? mb : '0')};
   line-height: 1.8;
 
   @media ${device.tablet} {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
     margin-bottom: 38px;
   }
