@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './i18n';
 
 import App from './App';
@@ -23,13 +24,19 @@ const theme = {
 
 const container = document.getElementById('root');
 const root = createRoot(container);
+const router = createBrowserRouter([
+  {
+    path: '/:lng?',
+    element: <App />,
+  }
+]);
 
 root.render(
   <ThemeProvider theme={theme}>
     <MicrophoneContextProvider>
       <QueueContextProvider>
         <CallContextProvider>
-          <App />
+          <RouterProvider router={router} />
         </CallContextProvider>
       </QueueContextProvider>
     </MicrophoneContextProvider>

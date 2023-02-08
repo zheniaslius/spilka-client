@@ -4,6 +4,7 @@ import {device} from '../../constants'
 export const Container = styled.div`
   display: flex;
   justify-content: center;
+  align-items: flex-end;
   margin-bottom: 30px;
 
   @media ${device.laptopHeight} {

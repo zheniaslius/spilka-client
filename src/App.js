@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReactGA from 'react-ga4';
 
 import Main from './components/Main';
 import Audio from './components/Audio';
@@ -35,10 +34,11 @@ const Container = styled.div`
   box-shadow: 0px 5px 14px -1px rgb(2 3 12 / 37%);
 `;
 
-const TRACKING_ID = 'G-C4YZZ43W5F';
-ReactGA.initialize(TRACKING_ID)
+// const TRACKING_ID = 'G-C4YZZ43W5F';
+// ReactGA.initialize(TRACKING_ID)
 
 const App = () => {
+
   return (
     <Wrapper>
       <Header />
