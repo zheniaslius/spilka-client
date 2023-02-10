@@ -12,4 +12,8 @@ export const LanguageText = styled.a`
   @media ${device.tablet} {
     left: 10px;
   }
+  
+  @media ${device.laptopHeight} {
+    left: 10px;
+  }
 `;
