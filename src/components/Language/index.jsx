@@ -1,26 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { LanguageText } from './styles';
 
+const languageMapper = {
+  en: {
+    route: '/',
+    name: 'eng',
+  },
+  uk: {
+    route: '/uk',
+    name: 'ua',
+  },
+};
+
 const Language = () => {
   const { i18n, t } = useTranslation();
-  const { lng: lngParams } = useParams();
-  const isUkrainian = i18n.language === 'uk';
-  const displayLng = isUkrainian ? 'eng' : 'ua';
+  const [language, setLanguage] = useState(i18n.language || 'en');
+  const navigate = useNavigate();
+  const newLanguage = language === 'uk' ? 'en' : 'uk';
+
+  const handleLanguageChange = () => {
+    setLanguage(newLanguage);
+    navigate(languageMapper[newLanguage].route);
+  };
 
   useEffect(() => {
-    const newLanguage = lngParams === 'uk' ? 'uk' : 'en';
-    i18n.changeLanguage(newLanguage);
-
-    if (lngParams === 'uk') {
-      document.title = t('description');
-    }
+    i18n.changeLanguage(language);
+    document.title = t('description');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lngParams, i18n]);
+  }, [language, i18n]);
 
-  return <LanguageText href={isUkrainian ? ' /' : 'uk'}>{displayLng}</LanguageText>;
+  return <LanguageText onClick={handleLanguageChange}>{languageMapper[newLanguage].name}</LanguageText>;
 };
 
 export default Language;

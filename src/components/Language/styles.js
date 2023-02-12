@@ -8,6 +8,7 @@ export const LanguageText = styled.a`
   left: 155px;
   top: -27px;
   text-transform: uppercase;
+  cursor: pointer;
 
   @media ${device.tablet} {
     left: 10px;
