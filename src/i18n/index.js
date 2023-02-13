@@ -13,7 +13,7 @@ const resources = {
       'userDisconnected': 'User disconnected',
       'startNewSearch': 'Start new search',
       'micMuted': 'Your mic is muted',
-      'description': 'Talk to a random person and keep your anonimity. Find someone from all over the world'
+      'description': 'Spilka - voice chat roulette'
     },
   },
   uk: {
@@ -27,7 +27,7 @@ const resources = {
       'userDisconnected': 'Співрозмовник відключився',
       'startNewSearch': 'Почніть новий пошук',
       'micMuted': 'Ваш мікрофон виключений',
-      'description': 'Spilka - анонімна голосова чат рулетка. Знайдіть співрозмовника зі всього світу та збережіть свою анонімність'
+      'description': 'Spilka - голосова чат рулетка'
     },
   },
 };
