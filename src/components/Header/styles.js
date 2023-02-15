@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {device} from '../../constants'
+import { device } from '../../constants';
 
 export const Container = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ export const Container = styled.div`
 
 export const AppName = styled.h1`
   font-weight: 600;
-  background-color: #628CF6;
+  background-color: #628cf6;
   font-size: 80px;
   position: relative;
   letter-spacing: 1.4px;
@@ -23,7 +23,7 @@ export const AppName = styled.h1`
   background-repeat: repeat;
 
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; 
+  -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
 

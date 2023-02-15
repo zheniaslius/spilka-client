@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { MicrophoneContext } from '../../context/MicrophoneContext';
-import { MicrophoneIcon } from './styles';
+import MicrophoneIcon from '../Icons/MicrophoneIcon';
 
 const Microphone = () => {
   const { toggleMute, muted } = useContext(MicrophoneContext);

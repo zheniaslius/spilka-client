@@ -8,23 +8,22 @@
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^9.15.0",
     "i18next": "^22.4.9",
+    "next": "^13.1.6",
     "peerjs": "^1.4.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-ga4": "^1.4.1",
     "react-i18next": "^12.1.4",
-    "react-router-dom": "^6.8.1",
-    "react-scripts": "5.0.1",
     "react-spinners": "^0.13.7",
     "socket.io-client": "^4.5.4",
     "styled-components": "^5.3.6",
+    "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "eslintConfig": {
     "extends": [

@@ -1,10 +1,19 @@
 import React, { useState, useRef, createContext, useEffect, useCallback } from 'react';
-import { addDoc, collection, query, where, getDocs, doc, limit, updateDoc, serverTimestamp } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  limit,
+  updateDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
 
-import db from '../config/firebase';
+import db from '../../firebaseConfig';
 
-const dbName = process.env.REACT_APP_DB_NAME;
-const colRef = collection(db, dbName);
+const dbName = process.env.NEXT_PUBLIC_DB_NAME;
 
 const REFETCH_DELAY = 1000;
 
@@ -14,6 +23,8 @@ const QueueContextProvider = ({ children }) => {
   const [id, setId] = useState();
   const [loading, setLoading] = useState(false);
   const inerval = useRef(null);
+
+  const colRef = collection(db, dbName);
 
   const addToQueue = useCallback(() => {
     if (!id) return;

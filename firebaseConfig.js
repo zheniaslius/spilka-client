@@ -14,10 +14,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('6LcBUf0jAAAAAPKS_daNmV5Y-Oc3TcZ2mopDFVoh'),
-  isTokenAutoRefreshEnabled: true
-});
+if (typeof window === 'object') {
+  initializeAppCheck(app, {
+    provider: new ReCaptchaV3Provider('6LcBUf0jAAAAAPKS_daNmV5Y-Oc3TcZ2mopDFVoh'),
+    isTokenAutoRefreshEnabled: true
+  });
+}
 
 
 export default getFirestore(app);

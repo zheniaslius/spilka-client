@@ -9,13 +9,13 @@ import {
   Pulse,
   Outline,
   Container,
-  UserLogo,
   GuideText,
   SearchContainer,
-  DisconnectedLogo,
   ErrorContainer,
   WarningMsg,
 } from './styles';
+import UserLogo from '../../components/Icons/UserLogo';
+import DisconnectedIcon from '../../components/Icons/DisconnectedIcon';
 
 const Main = () => {
   const { callPending, userDisconnected } = useContext(CallContext);
@@ -69,7 +69,7 @@ const DisconnectedText = ({ t }) => {
         {t('userDisconnected')} <br />
         {t('startNewSearch')}
       </GuideText>
-      <DisconnectedLogo />
+      <DisconnectedIcon />
     </ErrorContainer>
   );
 };

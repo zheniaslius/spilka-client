@@ -3,15 +3,14 @@ import ReactGA from 'react-ga4';
 
 import { CallContext } from '../../context/CallContext';
 import { QueueContext } from '../../context/QueueContext';
-import { Container, CallIcon, ControlsButton, FlexContainer } from './styles';
+import { Container, ControlsButton, FlexContainer } from './styles';
+import CallIcon from '../Icons/CallIcon';
 import Microphone from './Microphone';
-import notificaionSound from '../../assets/sounds/notifications-sound-127856_6LGXAENB.mp3';
 
 const Controls = () => {
   const [disabled, setDisabled] = useState(false);
   const { callPending, leaveCall, hangUp, callUser, setUserDisconnected } = useContext(CallContext);
   const { findSpeaker, updateDocument, loading } = useContext(QueueContext);
-  const audio = new Audio(notificaionSound);
 
   useEffect(() => {
     // prevent another tab open
@@ -47,7 +46,6 @@ const Controls = () => {
     } catch (error) {
       console.error('Error calling', error);
     }
-    audio.play();
   };
 
   return (

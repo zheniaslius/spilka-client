@@ -1,6 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import { ReactComponent as User } from '../../assets/images/icons/user.svg';
-import { ReactComponent as Disconnected } from '../../assets/images/icons/disconnect.svg';
 import { device } from '../../constants';
 
 export const Container = styled.div`
@@ -32,21 +30,6 @@ export const GuideText = styled.span`
     line-height: 1.6;
     margin-bottom: 38px;
   }
-`;
-
-export const UserLogo = styled(User)`
-  fill: ${(props) => props.theme.colors.black};
-  height: 140px;
-  width: 140px;
-`;
-
-export const DisconnectedLogo = styled(Disconnected)`
-  & path,
-  & circle {
-    fill: #ffffff45;
-  }
-  height: 140px;
-  width: 140px;
 `;
 
 export const ErrorContainer = styled.div`

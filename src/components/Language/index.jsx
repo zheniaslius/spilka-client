@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 import { LanguageText } from './styles';
 
 const languageMapper = {
   en: {
-    route: '/',
     name: 'eng',
   },
   uk: {
-    route: '/uk',
     name: 'ua',
   },
 };
 
 const Language = () => {
   const { i18n, t } = useTranslation();
+  const router = useRouter();
   const [language, setLanguage] = useState(i18n.language || 'en');
-  const navigate = useNavigate();
   const newLanguage = language === 'uk' ? 'en' : 'uk';
 
   const handleLanguageChange = () => {
     setLanguage(newLanguage);
-    navigate(languageMapper[newLanguage].route);
+    router.push('/', '/', { locale: newLanguage });
   };
 
   useEffect(() => {

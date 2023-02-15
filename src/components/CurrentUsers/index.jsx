@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { onSnapshot, query, collection } from 'firebase/firestore';
 
-import { Container, PeopleIcon, Count } from './styles';
-import db from '../../config/firebase';
+import { Container, Count } from './styles';
+import UsersIcon from '../../components/Icons/UsersIcon';
+import db from '../../../firebaseConfig';
 
 const CurrentUsers = () => {
   const [usersCount, setUsersCount] = useState(0);
 
   useEffect(() => {
-    const q = query(collection(db, process.env.REACT_APP_DB_NAME));
+    const q = query(collection(db, process.env.NEXT_PUBLIC_DB_NAME));
 
     onSnapshot(q, (snapshot) => {
       setUsersCount(snapshot.size);
@@ -17,7 +18,7 @@ const CurrentUsers = () => {
 
   return (
     <Container>
-      <PeopleIcon />
+      <UsersIcon />
       <Count>Online: {usersCount}</Count>
     </Container>
   );

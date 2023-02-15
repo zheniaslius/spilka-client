@@ -1,19 +1,17 @@
 import React, { createContext, useState, useRef, useEffect, useContext } from 'react';
 import { io } from 'socket.io-client';
-import { Peer } from 'peerjs';
-import ReactGA from 'react-ga4';
 
 import { QueueContext } from './QueueContext';
 import { MicrophoneContext } from './MicrophoneContext';
 
 const CallContext = createContext();
 
-const socket = io(process.env.REACT_APP_API_ENDPOINT);
+const socket = io(process.env.NEXT_PUBLIC_API_ENDPOINT);
 
 const options = {
   key: 'peerjs',
   debug: 2,
-  secure: process.env.REACT_APP_ENV === 'PRODUCTION',
+  secure: process.env.NEXT_PUBLIC_DB_NAME === 'PRODUCTION',
 };
 
 const CallContextProvider = ({ children }) => {
@@ -29,23 +27,26 @@ const CallContextProvider = ({ children }) => {
   const currentCall = useRef();
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then((currentStream) => {
-      setStream(currentStream);
+    import('peerjs').then(({ default: Peer }) => {
+      navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then((currentStream) => {
+        setStream(currentStream);
+      });
+
+      socket.on('me', (id) => {
+        peer.current = new Peer(id, options);
+        setMe(id);
+      });
+
+      socket.on('callUser', ({ from }) => {
+        setCall({ isReceivingCall: true, from });
+      });
+
+      socket.on('disconnect-peer', () => {
+        hangUp();
+        setUserDisconnected(true);
+      });
     });
 
-    socket.on('me', (id) => {
-      peer.current = new Peer(id, options);
-      setMe(id);
-    });
-
-    socket.on('callUser', ({ from }) => {
-      setCall({ isReceivingCall: true, from });
-    });
-
-    socket.on('disconnect-peer', () => {
-      hangUp();
-      setUserDisconnected(true);
-    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -63,11 +64,6 @@ const CallContextProvider = ({ children }) => {
   };
 
   const answerCall = () => {
-    ReactGA.event({
-      category: 'App',
-      action: 'Answered call',
-    });
-
     abortSpeakerSearch();
     setCallPending(true);
     socket.emit('answerCall', { to: call.from });
