@@ -14,7 +14,7 @@ const languageMapper = {
 };
 
 const Language = () => {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const router = useRouter();
   const [language, setLanguage] = useState(i18n.language || 'en');
   const newLanguage = language === 'uk' ? 'en' : 'uk';
@@ -26,7 +26,6 @@ const Language = () => {
 
   useEffect(() => {
     i18n.changeLanguage(language);
-    document.title = t('description');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [language, i18n]);
 
