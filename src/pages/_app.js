@@ -8,8 +8,9 @@ export default function App({ Component, pageProps }) {
   return (
     <div>
       <Head>
-        <meta charset="utf-8" />
+        <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-png" href="/images/favicon.png" />
         <title>{t('description')}</title>
       </Head>
      <Component {...pageProps} />

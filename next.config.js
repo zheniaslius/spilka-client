@@ -2,6 +2,7 @@ module.exports = {
   i18n: {
     locales: ['en', 'uk'],
     defaultLocale: 'en',
+    localeDetection: false,
   },
   webpack(config, options) {
     config.module.rules.push({

@@ -5,7 +5,7 @@ import useSound from 'use-sound';
 import { CallContext } from '../../context/CallContext';
 import { QueueContext } from '../../context/QueueContext';
 
-import notifSfx from '../../public/sounds/notifications-sound-127856_6LGXAENB.mp3';
+import notifSfx from '../../../public/sounds/notifications-sound-127856_6LGXAENB.mp3';
 
 const Audio = () => {
   const { me, callPending, userVideo, call, answerCall } = useContext(CallContext);
