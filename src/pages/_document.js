@@ -1,7 +1,8 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { withTranslation } from 'react-i18next';
 
-export default class MyDocument extends Document {
+class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
@@ -49,7 +50,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#000000" />
           <meta
             name="description"
-            content="Talk to a random person and keep your anonimity. Find someone from all over the world"
+            content={this.props.t('description')}
           />
         </Head>
         <body>
@@ -60,3 +61,5 @@ export default class MyDocument extends Document {
     );
   }
 }
+
+export default withTranslation()(MyDocument);

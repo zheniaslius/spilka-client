@@ -13,7 +13,7 @@ const resources = {
       'userDisconnected': 'User disconnected',
       'startNewSearch': 'Start new search',
       'micMuted': 'Your mic is muted',
-      'description': 'Spilka - voice chat roulette'
+      'description': 'Spilka - voice chat roulette. Speak with random preson from all around the world'
     },
   },
   uk: {
@@ -27,7 +27,7 @@ const resources = {
       'userDisconnected': 'Співрозмовник відключився',
       'startNewSearch': 'Почніть новий пошук',
       'micMuted': 'Ваш мікрофон виключений',
-      'description': 'Spilka - голосова чат рулетка'
+      'description': 'Spilka - голосовий чат. Розмовляйте з незнайомцями на будь які теми'
     },
   },
 };
