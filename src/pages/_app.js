@@ -12,6 +12,7 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-png" href="/images/favicon.png" />
         <title>{t('description')}</title>
+        <meta name="description" content={t('description')} />
       </Head>
      <Component {...pageProps} />
    </div>

@@ -1,6 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import { Translation } from 'react-i18next';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -39,7 +38,6 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <meta name="theme-color" content="#000000" />
-          <Translation>{(t) => <meta name="description" content={t('description')} />}</Translation>
         </Head>
         <body>
           <Main />
