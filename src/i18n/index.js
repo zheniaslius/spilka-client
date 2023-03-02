@@ -5,7 +5,7 @@ const resources = {
   en: {
     translation: {
       'hello': 'Hi',
-      'thisIs': 'This is audio chat roulette',
+      'thisIs': 'This is audio chat',
       'searching': 'Seaching for someone cool',
       'toStart': 'To start searching speaker press the button',
       'notRecored': 'Conversations are not recorded',
@@ -13,13 +13,13 @@ const resources = {
       'userDisconnected': 'User disconnected',
       'startNewSearch': 'Start new search',
       'micMuted': 'Your mic is muted',
-      'description': 'Spilka - voice chat roulette. Speak with random preson from all around the world'
+      'description': 'Spilka - voice chat. Speak with random preson from all around the world'
     },
   },
   uk: {
     translation: {
       'hello': 'Привіт',
-      'thisIs': 'Це голосова чат рулетка',
+      'thisIs': 'Це голосовий чат',  
       'searching': 'Шукаємо співрозмовника',
       'toStart': 'Щоб почати пошук співрозмовника натисніть кнопку',
       'notRecored': 'Розмови не записуються',
