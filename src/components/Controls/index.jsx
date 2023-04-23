@@ -9,7 +9,8 @@ import Microphone from './Microphone';
 
 const Controls = () => {
   const [disabled, setDisabled] = useState(false);
-  const { callPending, leaveCall, hangUp, callUser, setUserDisconnected } = useContext(CallContext);
+  const { callPending, leaveCall, hangUp, callUser, setUserDisconnected, handleMicPermission } =
+    useContext(CallContext);
   const { findSpeaker, updateDocument, loading } = useContext(QueueContext);
 
   useEffect(() => {
@@ -39,6 +40,7 @@ const Controls = () => {
       action: 'Started search',
     });
     try {
+      handleMicPermission();
       await updateDocument({ inSearch: true });
       setUserDisconnected(false);
       const speakerId = await findSpeaker();

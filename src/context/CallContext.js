@@ -28,10 +28,6 @@ const CallContextProvider = ({ children }) => {
 
   useEffect(() => {
     import('peerjs').then(({ default: Peer }) => {
-      navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then((currentStream) => {
-        setStream(currentStream);
-      });
-
       socket.on('me', (id) => {
         peer.current = new Peer(id, options);
         setMe(id);
@@ -55,6 +51,12 @@ const CallContextProvider = ({ children }) => {
       setUserDisconnected(false);
     }
   }, [callPending, abortSpeakerSearch]);
+
+  const handleMicPermission = () => {
+    navigator.mediaDevices.getUserMedia({ video: false, audio: true }).then((currentStream) => {
+      setStream(currentStream);
+    });
+  };
 
   const renderAudio = (stream) => (userVideo.current.srcObject = stream);
 
@@ -108,6 +110,7 @@ const CallContextProvider = ({ children }) => {
         userVideo,
         me,
         callUser,
+        handleMicPermission,
         leaveCall,
         hangUp,
         answerCall,
