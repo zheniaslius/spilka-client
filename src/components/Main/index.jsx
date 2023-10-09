@@ -55,9 +55,6 @@ const InitialText = ({ loading, t }) => {
       {t('thisIs')} <br />
       {t('toStart')} <br />
       {t('notRecored')}.{' '}
-      <a href="https://bloggeek.me/is-webrtc-safe/" target="_blank" rel="noreferrer">
-        {t('learn')}
-      </a>
     </GuideText>
   );
 };
